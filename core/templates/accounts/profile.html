@@ -5,13 +5,13 @@
 
     {% if request.user.id == user.id %}
         <a href="{% url 'blog:post_create' %}" class="btn btn-primary">Create</a>
-        <a href="{% url 'accounts:edit_user' %}" class="btn btn-info">Edit Profile</a>
+        <a href="{% url 'accounts:user_edit' user.id %}" class="btn btn-info">Edit Profile</a>
     {% endif %}
 
 
-{#    <div class="card">#}
-{#        {% for post in posts %}#}
-{#            <a href="{{ post.get_absolute_url }}" class="card-body">{{ post.body|truncatewords:8 }}</a>#}
-{#        {% endfor %}#}
-{#    </div>#}
+    {#    <div class="card">#}
+    {#        {% for post in posts %}#}
+    {#            <a href="{{ post.get_absolute_url }}" class="card-body">{{ post.body|truncatewords:8 }}</a>#}
+    {#        {% endfor %}#}
+    {#    </div>#}
 {% endblock %}

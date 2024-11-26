@@ -34,4 +34,4 @@ class LogoutUserView(View):
     def get(self, request):
         logout(request)
         messages.success(request, 'you logged out successfully', 'success')
-        return redirect('home:home')
+        return redirect('blog:post-list')
