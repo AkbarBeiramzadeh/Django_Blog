@@ -6,8 +6,8 @@ from django.contrib.auth import logout
 
 
 class ProfileView(View):
-    def get(self, request, user_id):
-        user = get_object_or_404(User, pk=user_id)
+    def get(self, request, pk):
+        user = get_object_or_404(User, pk=pk)
         posts = user.posts.all()
 
         return render(request, 'accounts/profile.html', {'user': user, 'posts': posts})
