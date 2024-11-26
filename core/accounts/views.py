@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 
-from accounts.forms import UserRegistrationForm, UserLoginForm, EditUserForm
+from accounts.forms import UserRegistrationForm, UserLoginForm
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
