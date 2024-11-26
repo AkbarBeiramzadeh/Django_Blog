@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 
@@ -5,6 +6,9 @@ from accounts.forms import UserRegistrationForm, UserLoginForm, EditUserForm
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
+from .models import Profile
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
 
 User = get_user_model()
 
@@ -17,21 +21,35 @@ class ProfileView(View):
         return render(request, 'accounts/profile.html', {'user': user, 'posts': posts})
 
 
-class EditProfileView(View):
-    form_class = EditUserForm
+# class EditProfileView(View):
+#     form_class = EditUserForm
+#
+#     def get(self, request):
+#         profile = Profile.objects.get(user=request.user)
+#         form = self.form_class(instance=profile)
+#         return render(request, 'accounts/edit_profile.html', {'form': form})
+#
+#     def post(self, request):
+#         form = self.form_class(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             # request.user.email = form.cleaned_data['email']
+#             request.user.save()
+#             messages.success(request, 'profile edited successfully', 'success')
+#         return redirect('account:user_profile', request.user.id)
 
-    def get(self, request):
-        form = self.form_class(instance=request.user.profile, initial={'email': request.user.email})
-        return render(request, 'accounts/edit_profile.html', {'form': form})
+class EditProfileView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    fields = ['first_name', 'last_name', 'description', 'image']
+    template_name = 'accounts/edit_profile.html'
 
-    def post(self, request):
-        form = self.form_class(request.POST, instance=request.user.profile)
-        if form.is_valid():
-            form.save()
-            request.user.email = form.cleaned_data['email']
-            request.user.save()
-            messages.success(request, 'profile edited successfully', 'success')
-        return redirect('account:user_profile', request.user.id)
+    # success_url = reverse_lazy('accounts:user_profile')
+
+    def get_object(self):
+        return Profile.objects.get(user=self.request.user)
+
+    def get_success_url(self):
+        return reverse_lazy('accounts:user_profile', args=[self.object.user.id])
 
 
 class LogoutUserView(View):
