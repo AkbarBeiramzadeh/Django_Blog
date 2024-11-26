@@ -5,7 +5,7 @@
 
     {% if request.user.id == user.id %}
         <a href="{% url 'blog:post_create' %}" class="btn btn-primary">Create</a>
-        <a href="{% url 'accounts:user_edit' user.id %}" class="btn btn-info">Edit Profile</a>
+        <a href="{% url 'accounts:user_edit' %}" class="btn btn-info">Edit Profile</a>
     {% endif %}
 
 

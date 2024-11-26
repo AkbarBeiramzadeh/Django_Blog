@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 
-from accounts.forms import UserRegistrationForm, UserLoginForm
+from accounts.forms import UserRegistrationForm, UserLoginForm, EditUserForm
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
@@ -18,7 +18,7 @@ class ProfileView(View):
 
 
 class EditProfileView(View):
-    # form_class = EditUserForm
+    form_class = EditUserForm
 
     def get(self, request):
         form = self.form_class(instance=request.user.profile, initial={'email': request.user.email})
