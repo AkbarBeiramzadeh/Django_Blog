@@ -5,7 +5,7 @@ from .models import Post, Comment
 class PostCreateUpdateForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("title", "content", "status", "category")
+        fields = ("title", "content", "status", "category", "published_date")
 
 
 class CommentCreateForm(forms.ModelForm):
@@ -13,7 +13,8 @@ class CommentCreateForm(forms.ModelForm):
         model = Comment
         fields = ('body',)
         widgets = {
-            'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your comment here...'})
+            'body': forms.Textarea(
+                attrs={'class': 'form-control', 'placeholder': 'Enter your comment here...', 'rows': 3, })
         }
 
 

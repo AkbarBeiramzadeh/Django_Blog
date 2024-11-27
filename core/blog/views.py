@@ -26,10 +26,10 @@ class PostCreateView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             new_post = form.save(commit=False)
-            new_post.user = request.user
+            new_post.author = request.user
             new_post.save()
             messages.success(request, 'you created a new post', 'success')
-            return redirect('blog:post_detail', new_post.id, new_post.slug)
+            return redirect('blog:post_detail', new_post.id)
 
 
 class PostDetailView(View):
@@ -79,12 +79,12 @@ class PostAddReplyView(View):
 class PostDeleteView(LoginRequiredMixin, View):
     def get(self, request, post_id):
         post = get_object_or_404(Post, pk=post_id)
-        if post.user.id == request.user.id:
+        if post.author.id == request.user.id:
             post.delete()
             messages.success(request, 'post deleted successfully', 'success')
         else:
             messages.error(request, 'you cant delete this post', 'danger')
-        return redirect('home:home')
+        return redirect('blog:post-list')
 
 
 class PostUpdateView(LoginRequiredMixin, View):
