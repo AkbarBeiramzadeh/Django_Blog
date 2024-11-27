@@ -1,2 +1,8 @@
 django==4.2
 pillow
+djangorestframework
+markdown
+django-filter
+drf-yasg
+djangorestframework-simplejwt
+django-mail-templated
