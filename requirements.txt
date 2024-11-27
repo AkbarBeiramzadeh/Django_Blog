@@ -6,3 +6,7 @@ django-filter
 drf-yasg
 djangorestframework-simplejwt
 django-mail-templated
+black
+flake8
+python-decouple
+coreapi
