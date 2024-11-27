@@ -98,7 +98,7 @@ class PostUpdateView(LoginRequiredMixin, View):
         post = self.post_instance
         if not post.author.id == request.user.id:
             messages.error(request, 'you cant update this post', 'danger')
-            return redirect('home:home')
+            return redirect('blog:post-list')
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
@@ -113,4 +113,4 @@ class PostUpdateView(LoginRequiredMixin, View):
             new_post = form.save(commit=False)
             new_post.save()
             messages.success(request, 'you updated this post', 'success')
-            return redirect('home:post_detail', post.id, post.slug)
+            return redirect('blog:post_detail', post.id)

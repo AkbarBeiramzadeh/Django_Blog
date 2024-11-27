@@ -40,11 +40,12 @@
                 </form>
             {% endif %}
 
-            {% with replies=comment.rcomments.all %}
-                {% for reply in replies %}
-                    <p class="bg-primary p-3 m-2">{{ reply.user }} <br/> {{ reply.body }}</p>
-                {% endfor %}
-            {% endwith %}
+{#            {% with replies=comment.rcomments.all %}#}
+{#                {% for reply in replies %}#}
+{##}
+{#                    <p class="bg-primary p-3 m-2">{{ reply.user }} <br/> {{ reply.body }}</p>#}
+{#                {% endfor %}#}
+{#            {% endwith %}#}
         </div><br/>
     {% empty %}
         <p>No comments yet!</p>
