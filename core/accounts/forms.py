@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from .models import Profile
+from django.contrib.auth.password_validation import validate_password
 
 User = get_user_model()
 
@@ -25,6 +26,10 @@ class UserRegistrationForm(forms.Form):
 
         if p1 and p2 and p1 != p2:
             raise ValidationError('password must match')
+        try:
+            validate_password(cd["password2"])
+        except ValidationError as e:
+            raise ValidationError({"password2": list(e)})
 
 
 class UserLoginForm(forms.Form):
