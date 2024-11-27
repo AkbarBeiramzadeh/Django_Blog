@@ -1,17 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2 class="text-center">{{ user.username }}</h2>
+    <h4 >email : {{ user.email }}</h4>
+    <p>first name : {{ profile.first_name }}</p>
+    <p>last name : {{ profile.last_name }}</p>
+    <p>description : {{ profile.description }}</p>
 
     {% if request.user.id == user.id %}
-        <a href="{% url 'blog:post_create' %}" class="btn btn-primary">Create</a>
+        <a href="{% url 'blog:post_create' %}" class="btn btn-primary">Create Post</a>
         <a href="{% url 'accounts:user_edit'%}" class="btn btn-info">Edit Profile</a>
     {% endif %}
 
+    <hr>
+    {% if posts %}
+    	    <h5>My Posts :</h5>
+        <div class="card">
+            {% for post in posts %}
+                <h6>{{ post.title }}</h6>
+                <a href="{{ post.get_absolute_url }}" class="card-body">{{ post.content|truncatewords:8 }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
 
-    {#    <div class="card">#}
-    {#        {% for post in posts %}#}
-    {#            <a href="{{ post.get_absolute_url }}" class="card-body">{{ post.body|truncatewords:8 }}</a>#}
-    {#        {% endfor %}#}
-    {#    </div>#}
 {% endblock %}

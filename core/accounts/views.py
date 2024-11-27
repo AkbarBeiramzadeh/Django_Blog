@@ -16,9 +16,10 @@ User = get_user_model()
 class ProfileView(View):
     def get(self, request, pk):
         user = get_object_or_404(User, pk=pk)
+        profile = get_object_or_404(Profile, user=user)
         posts = user.posts.all()
 
-        return render(request, 'accounts/profile.html', {'user': user, 'posts': posts})
+        return render(request, 'accounts/profile.html', {'user': user, 'profile': profile, 'posts': posts})
 
 
 # class EditProfileView(View):
