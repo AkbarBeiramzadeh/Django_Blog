@@ -22,23 +22,6 @@ class ProfileView(View):
         return render(request, 'accounts/profile.html', {'user': user, 'profile': profile, 'posts': posts})
 
 
-# class EditProfileView(View):
-#     form_class = EditUserForm
-#
-#     def get(self, request):
-#         profile = Profile.objects.get(user=request.user)
-#         form = self.form_class(instance=profile)
-#         return render(request, 'accounts/edit_profile.html', {'form': form})
-#
-#     def post(self, request):
-#         form = self.form_class(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             # request.user.email = form.cleaned_data['email']
-#             request.user.save()
-#             messages.success(request, 'profile edited successfully', 'success')
-#         return redirect('account:user_profile', request.user.id)
-
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
     fields = ['first_name', 'last_name', 'description', 'image']

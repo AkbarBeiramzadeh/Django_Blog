@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_simplejwt',
     'mail_templated',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'mail_templated'
 ]
 
 MIDDLEWARE = [
@@ -149,6 +150,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=8),
 }
 
+# email configuration
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = False
 EMAIL_HOST = "smtp4dev"
@@ -158,3 +160,5 @@ EMAIL_PORT = 25
 
 # celery configs
 CELERY_BROKER_URL = 'redis://redis:6379/1'
+
+

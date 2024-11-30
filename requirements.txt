@@ -10,3 +10,8 @@ black
 flake8
 python-decouple
 coreapi
+pytest
+pytest-django
+faker
+django-mail-templated
+ django-templated-mail
