@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'mail_templated',
     'rest_framework.authtoken',
-    'mail_templated'
 ]
 
 MIDDLEWARE = [
